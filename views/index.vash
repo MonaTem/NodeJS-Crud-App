@@ -1,0 +1,63 @@
+@html.extend('layout', function(model) { @html.block('content', function(model) {
+<div id="app">
+  <div class="row text-center">
+    <button v-on:click="createPersonBtn" class="btn btn-primary">Create Person</button>
+  </div>
+  <br>
+  <table class="table table-hover table-striped table-bordered">
+    <tr>
+      <th>#</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Age</th>
+      <th></th>
+    </tr>
+
+    <template v-for="p in people">
+      <tr>
+        <td>{{p.Id}}</td>
+        <td>{{p.FirstName}}</td>
+        <td>{{p.LastName}}</td>
+        <td>{{p.Age}}</td>
+        <td><button v-on:click="updateBtn(p)" class="btn btn-warning">Update</button> <button v-on:click="deletePersonBtn(p.Id)" class="btn btn-danger">Delete</button></td>
+      </tr>
+    </template>
+
+  </table>
+
+  <div class="modal fade" id="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{modalTitle}}</h4>
+        </div>
+        <div class="modal-body">
+
+          <form  class="form-horizontol" method="POST" id="personForm" :action="updatePerson ? '/updatePerson' : '/addPerson'">
+            <div class="form-group">
+              <input name="firstName" class="form-control" v-model="person.firstName" type="text" placeholder="First Name" />
+              <input name="id"  v-model="person.id" hidden type="text"  />
+            </div>
+            <div class="form-group">
+              <input name="lastName" class="form-control" v-model="person.lastName" type="text" placeholder="Last Name" />
+            </div>
+            <div class="form-group">
+              <input name="age" class="form-control" v-model="person.age" type="text" placeholder="Age" />
+            </div>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button  type="button" onclick="personForm.submit()" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.modal -->
+
+</div>
+
+}) })
+<script src="/js/index.js" type="text/javascript"></script>
