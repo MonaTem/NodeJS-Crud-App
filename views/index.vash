@@ -1,7 +1,8 @@
 @html.extend('layout', function(model) { @html.block('content', function(model) {
 <div id="app">
-  <div class="row text-center">
-    <button v-on:click="createPersonBtn" class="btn btn-primary">Create Person</button>
+
+  <div class="row" style="border-bottom: 5px 2px" >
+    <button v-on:click="createPersonBtn" class="btn btn-outline-primary mx-auto">Create Person</button>
   </div>
   <br>
   <table class="table table-hover table-striped table-bordered">
